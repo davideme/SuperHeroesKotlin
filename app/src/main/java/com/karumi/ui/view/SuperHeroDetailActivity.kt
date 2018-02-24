@@ -65,7 +65,9 @@ class SuperHeroDetailActivity : BaseActivity(), SuperHeroDetailPresenter.View {
 
     override val activityModules = Module(allowSilentOverride = true) {
         bind<SuperHeroDetailPresenter>() with provider {
-            SuperHeroDetailPresenter(this@SuperHeroDetailActivity, instance())
+            val presenter = SuperHeroDetailPresenter(this@SuperHeroDetailActivity, instance())
+            lifecycle.addObserver(presenter)
+            presenter
         }
         bind<GetSuperHeroByName>() with provider { GetSuperHeroByName(instance()) }
     }

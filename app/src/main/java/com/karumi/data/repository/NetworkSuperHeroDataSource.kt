@@ -57,8 +57,8 @@ class NetworkSuperHeroDataSource(private val apiClient: CharacterApiClient) : Su
 
     private fun mapException(exception: Exception): DomainError =
         when {
-            exception is MarvelAuthApiException -> AuthDomainError()
-            exception.cause is ConnectException -> NotInternetDomainError()
+            exception is MarvelAuthApiException -> AuthDomainError
+            exception.cause is ConnectException -> NotInternetDomainError
             else -> UnknownDomainError()
         }
 

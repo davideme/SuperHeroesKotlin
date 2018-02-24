@@ -1,18 +1,20 @@
 package com.karumi.ui.presenter
 
+import android.arch.lifecycle.Lifecycle
+import android.arch.lifecycle.LifecycleObserver
+import android.arch.lifecycle.OnLifecycleEvent
 import co.metalab.asyncawait.async
 import com.karumi.common.weak
 import com.karumi.domain.model.DomainError
 import com.karumi.domain.model.SuperHero
 import com.karumi.domain.usecase.GetSuperHeroByName
-import com.karumi.ui.LifecycleSubscriber
 import org.funktionale.either.Either.Left
 import org.funktionale.either.Either.Right
 
 class SuperHeroDetailPresenter(
     view: View,
     private val getSuperHeroByName: GetSuperHeroByName) :
-    LifecycleSubscriber {
+    LifecycleObserver {
 
     private val view: View? by weak(view)
 
@@ -26,7 +28,8 @@ class SuperHeroDetailPresenter(
         }
     }
 
-    override fun update() {
+    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
+    fun update() {
         view?.showLoading()
         refreshSuperHero()
     }
