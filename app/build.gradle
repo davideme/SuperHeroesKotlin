@@ -2,6 +2,8 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'shot'
+apply plugin: 'kotlin-kapt'
+
 
 private static Properties loadMarvelProperties() {
     Properties props = new Properties()
@@ -68,6 +70,11 @@ dependencies {
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'org.funktionale:funktionale-either:1.1'
     compile 'com.karumi:marvelapiclient:0.0.4'
+
+    // Lifecycles only (no ViewModel or LiveData)
+    implementation "android.arch.lifecycle:runtime:1.1.0"
+    kapt "android.arch.lifecycle:compiler:1.1.0"
+
     testCompile 'junit:junit:4.11'
     testCompile "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
     testCompile "com.nhaarman:mockito-kotlin:1.5.0"
